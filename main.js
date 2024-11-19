@@ -42,6 +42,8 @@ const car = {
 
 Object.defineProperty(car, 'price', {
     enumerable: false,
+    writable: true,
+    configurable: true
 });
 
 const result = JSON.stringify(Object.getOwnPropertyDescriptors(car));
@@ -80,7 +82,7 @@ function deepCopy(obj){
     for(let key in obj){
         objCopy[key] = obj[key];
         if(obj[key] === 'object'){
-            objCopy[key] = seekDeeper(obj, objCopy)
+            objCopy[key] = deepCopy(obj, objCopy)
         }
     }
     return objCopy;
